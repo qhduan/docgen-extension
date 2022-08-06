@@ -2,6 +2,8 @@
 
 CoWriter could help you generate docstring.
 
+[Extension page](https://marketplace.visualstudio.com/items?itemName=kdfhq.cowriter)
+
 ## Features
 
 Generate docstring.
