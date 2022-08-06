@@ -6,6 +6,10 @@
 	"engines": {
 		"vscode": "^1.69.0"
 	},
+	"publisher": "kdfhq",
+	"repository": {
+		"url": "https://github.com/qhduan/docgen-extension"
+	},
 	"categories": [
 		"Other"
 	],
