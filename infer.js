@@ -1,8 +1,12 @@
 
 const axios = require('axios').default
-// const pythonApiUrl = 'http://td2:8030'
-// const javascriptApiUrl = 'http://td2:8040'
 
+/**
+ * @param {string} api server of api
+ * @param {object} context context to predict
+ * @param {string} pkv_name
+ * @returns {Promise<string>}
+ */
 async function infer(api, context, pkv_name=null) {
     console.log('send to server', api)
     const ret = await axios.post(api, {

@@ -2,7 +2,7 @@
 	"name": "cowriter",
 	"displayName": "cowriter",
 	"description": "generate code/doc",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"engines": {
 		"vscode": "^1.69.0"
 	},
@@ -19,11 +19,27 @@
 	],
 	"main": "./extension.js",
 	"contributes": {
-		"commands": [
+		"keybindings": [
 			{
-				"command": "cowriter.helloWorld",
-				"title": "Hello World"
+				"command": "cowriter.docGen",
+				"key": "cmd+.",
+				"mac": "cmd+.",
+				"when": "isMac && editorTextFocus && editorLangId =~ /typescript|javascript|python|php|java|c|cpp|csharp|dart|ruby|go|rust/"
 			},
+			{
+				"command": "cowriter.docGen",
+				"key": "ctrl+.",
+				"mac": "ctrl+.",
+				"when": "isLinux && editorTextFocus && editorLangId =~ /typescript|javascript|python|php|java|c|cpp|csharp|dart|ruby|go|rust/"
+			},
+			{
+				"command": "cowriter.docGen",
+				"key": "ctrl+.",
+				"win": "ctrl+.",
+				"when": "isWindows && editorTextFocus && editorLangId =~ /typescript|javascript|python|php|java|c|cpp|csharp|dart|ruby|go|rust/"
+			}
+		],
+		"commands": [
 			{
 				"command": "cowriter.docGen",
 				"title": "Doc Gen"
@@ -40,44 +56,51 @@
 		},
 		"views": {
 			"cowriter": [
-			    {
+				{
 					"id": "cowriter",
 					"name": "CoWriter",
 					"icon": "media/icon.png",
 					"contextualTitle": "CoWriter"
-			    }
+				}
 			]
 		},
 		"menus": {
 			"view/item/context": [
-			  {
-				"command": "cowriter.docGen",
-				"when": "view == cowriter",
-				"group": "navigation"
-			  }
+				{
+					"command": "cowriter.docGen",
+					"when": "view == cowriter",
+					"group": "navigation"
+				}
 			]
 		},
 		"viewsWelcome": [
 			{
-			  "view": "cowriter",
-			  "contents": "[Write Doc](command:cowriter.docGen)"
+				"view": "cowriter",
+				"contents": "[Write Doc](command:cowriter.docGen)",
+				"when": "!cowriter.hasDocGenerating"
+			},
+			{
+				"view": "cowriter",
+				"contents": "[Write Doc (generating...)](command:cowriter.docGen)",
+				"enablement": "false",
+				"when": "cowriter.hasDocGenerating"
 			}
 		],
 		"configuration": {
 			"title": "CoWriter",
 			"properties": {
-			  "cowriter.pythonApi": {
-				"type": "string",
-				"scope": "resource",
-				"default": "",
-				"description": "A url for python docgen server"
-			  },
-			  "cowriter.javascriptApi": {
-				"type": "string",
-				"scope": "resource",
-				"default": "",
-				"description": "A url for javascript docgen server"
-			  }
+				"cowriter.pythonApi": {
+					"type": "string",
+					"scope": "resource",
+					"default": "",
+					"description": "A url for python docgen server"
+				},
+				"cowriter.javascriptApi": {
+					"type": "string",
+					"scope": "resource",
+					"default": "",
+					"description": "A url for javascript docgen server"
+				}
 			}
 		}
 	},
@@ -87,17 +110,18 @@
 		"test": "node ./test/runTest.js"
 	},
 	"devDependencies": {
-		"@types/vscode": "^1.69.0",
 		"@types/glob": "^7.2.0",
 		"@types/mocha": "^9.1.1",
 		"@types/node": "16.x",
+		"@types/vscode": "^1.69.0",
+		"@vscode/test-electron": "^2.1.5",
 		"eslint": "^8.18.0",
 		"glob": "^8.0.3",
 		"mocha": "^10.0.0",
-		"typescript": "^4.7.4",
-		"@vscode/test-electron": "^2.1.5"
+		"typescript": "^4.7.4"
 	},
 	"dependencies": {
-		"axios": "^0.27.2"
+		"axios": "^0.27.2",
+		"openai-api": "^1.3.1"
 	}
 }

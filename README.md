@@ -23,6 +23,11 @@ Early develop stage, WIP
 
 ## Release Notes
 
+### 0.0.2
+
+- Add hokey
+- Add progressbar
+
 ### 0.0.1
 
 Initial release of CoWriter
